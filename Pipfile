@@ -4,11 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-jupyter = "*"
 google-api-python-client = "*"
+requests = "*"
 
 [dev-packages]
 ipython = "*"
+jupyter = "*"
 
 [requires]
 python_version = "3.6"
