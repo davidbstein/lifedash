@@ -1,2 +1,2 @@
 # lifedash
-A physical dashboard for everyday lift
+A physical dashboard for everyday life
