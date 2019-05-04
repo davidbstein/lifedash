@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 google-api-python-client = "*"
 requests = "*"
+mistune = "*"
 
 [dev-packages]
 ipython = "*"

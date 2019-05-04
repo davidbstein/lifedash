@@ -113,30 +113,3 @@ for event in upcoming['items']:
 """
 # # Getting todo list from Dropbox Paper
 """
-paper_secrets = SECRETS['DROPBOX_PAPER']
-dropbox_cookie = ";".join('{}={}'.format(k, v) for k, v in paper_secrets['cookie'].items())
-compile_resp = requests.post(
-  "https://paper.dropbox.com/pad/export2",
-  data={
-    "localPadId": paper_secrets['pad_id'],
-    "mode": 1,
-    "format": 2,
-    "xsrf": paper_secrets['xsrf']
-  },
-  headers={
-    'Cookie': dropbox_cookie,
-  }
-)
-resp_json = compile_resp.json()
-########
-# Rather than polling for the document to be ready, I just wait...
-import time
-time.sleep(5)
-########
-file_resp = requests.get(
-    resp_json['url'],
-    headers={
-        'Cookie': dropbox_cookie
-    }
-)
-print(file_resp.text)

@@ -1,5 +1,6 @@
 secrets.json
 *.ipynb
+www/html
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
