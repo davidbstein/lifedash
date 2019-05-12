@@ -35,7 +35,7 @@ def _get_md_text(url):
     return(file_resp.text)
   raise Exception("{}: {}".format(file_resp.status_code, file_resp.reason))
 
-def get_md():
+def get_paper_md():
   url = _request_md_generation()
   for _ in range(5):
     time.sleep(1)
@@ -47,8 +47,8 @@ def get_md():
     ).replace("[ ]", "- ![](/img/uncheck.png)"
     ).replace("[x]", "- ![](/img/check.png)")
 
-def get_html():
-  md = get_md()
+def get_paper_html():
+  md = get_paper_md()
   html = """
   <html>
   <head>
