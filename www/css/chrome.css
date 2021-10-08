@@ -1,0 +1,444 @@
+html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {	margin: 0;	padding: 0;	border: 0;	font-size: 100%;	font: inherit;	vertical-align: baseline;}/* HTML5 display-role reset for older browsers */article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {	display: block;}body {	line-height: 1;}ol, ul {	list-style: none;}blockquote, q {	quotes: none;}blockquote:before, blockquote:after,q:before, q:after {	content: '';	content: none;}table {	border-collapse: collapse;	border-spacing: 0;}
+
+
+
+body {
+    margin: 0;;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    font-family: sans;
+    width: calc(1900px - 32px - (4 * 16px));
+    height: calc(1080px - 32px - (3 * 16px));
+    display: grid;
+    grid-template-columns: [cstart] 10% 20% [cleft] 20% 20% [cright] 20% 10% [cend];
+    grid-template-rows: 20% 10% 20% 40% 10%;
+    gap: 16px;
+    margin: 16px;
+}
+.fieldbox {
+    overflow: hidden;
+    padding: 1em;
+    backdrop-filter: blur(15px);
+    background: rgba(0,0,0, 0.2);
+    color: white;
+    border-radius: 16px;
+    box-shadow: 8px 8px 16px 0px rgba(0,0,0,.5);
+}
+
+body.hour-2 {
+    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(/img/bgs/hours/bg2.jpg) !important;
+}
+
+
+/* .fieldbox { overflow: scroll; } */
+h1 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+#location {
+    grid-column: 1 / cleft;
+    grid-row: 3 / 4;
+}
+
+#activity {
+    grid-column: 1 / cleft;
+    grid-row: 2 / 3;
+}
+
+#activity-history {
+    grid-column: 1 / cleft;
+    grid-row: 3 / 4;
+}
+
+#now {
+    grid-column: cright / cend;
+    grid-row: 1 / 2;
+}
+
+#current-weather {
+    grid-column: cstart / 2;
+    grid-row: 1 / 2;
+}
+
+#hourly-weather {
+    grid-column: 2 / 4;
+    grid-row: 1 / 2;
+}
+
+#weekly-weather {
+    grid-column: 4/5;
+    grid-row: 1/2
+}
+#last_update {
+    grid-column: 6 / cend;
+    grid-row: 5 / 6;
+}
+
+#agenda {
+    grid-column: 1/cleft;
+    grid-row: 4/5;
+}
+#fitness {
+    grid-column: 1 / 6;
+    grid-row: 5 / 6;
+}
+#pill-timing {
+    grid-column: cright / cend;
+    grid-row: 2 / 3;
+}
+
+
+#last_update {
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    flex-direction: column
+}
+#last_update h1 {
+    font-size: medium;
+}
+
+#w-hourly {
+    display: flex;
+}
+#hourly-weather {
+    display: flex;
+    display: flex;
+    flex-wrap: nowrap;
+}
+.hourly-weather-entry {
+    display: grid;
+    width: 30px;
+}
+
+.hwe-icon img {
+    width: 28px;
+    margin: 0 auto;
+    filter: invert(1) opacity(0.5);
+}
+
+.hwe-filler {
+    position: absolute;
+    display: block;
+    width: 30px;
+    bottom: 0;
+}
+.hwe-filler.temp {
+    border-top: 3px solid #a6a6a6;
+    background: rgba(255 255 255 / 30%);
+}
+.hwe-filler.precip {
+    border-top: 3px solid #4882ff;
+    background: rgb(0 116 255 / 30%);
+}
+.hwe-bar-container {
+    height: 44px;
+    margin-top: 16px;
+    position: relative;
+}
+.hwe-stat-container {
+    height: 32px;
+    margin-top: 20px;
+    position: relative;
+}
+.hwe-stat {
+    text-align: center;
+    width: 100%;
+    text-align: center;
+}
+.hwe-pop {
+    color: #93c0ff;
+}
+.hwe-temp {
+}
+.hwe-hour {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 16px;
+    font-size: 12px;
+}
+
+
+
+
+
+#agenda {
+}
+#agenda h2 {
+    height: 20px;
+    text-align: left;
+    font-size: 24px;
+}
+#agenda-container {
+    overflow-y: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.agenda-entry {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 16px;
+    padding-top: 16px;
+    font-size: 20px;
+}
+
+.a-e-name {
+}
+.a-e-dots {
+    flex-grow: 1;
+    border-bottom: 1px solid #ccc;
+    border-style: dashed;
+}
+.a-e-event-list {
+    padding-bottom: 16px;
+}
+.a-e-status-STARTED {
+    font-weight: bold;
+}
+.a-e-status-UPCOMING {
+}
+.a-e-status-DONE {
+    color: #aaa;
+}
+
+#current-weather {
+    text-align: center;
+}
+.cur-sun {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 12px;
+}
+.cur-sun-entry img {
+    height: 32px;
+}
+.cur-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 32px;
+    font-weight: bold;
+    height: 16px;
+}
+.cur-hum {
+    padding-right: 4px;
+}
+.cur-hum:after {
+    content: '%';
+    position: absolute;
+    font-size: 16px;
+    margin: 3px -2px;
+}
+.cur-text-info {
+    margin: 6px 0;
+}
+.cur-desc, .cur-forcast {
+    white-space: nowrap;
+    max-width: 100%;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.cur-icon {
+    text-align: center;
+}
+.cur-icon img {
+    width: 64px;
+}
+#current-weather img {
+    filter: invert(1) opacity(0.9);
+}
+
+
+
+#pill-timing-container {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    height: 100%;
+}
+
+.p-t-current {
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.5em;
+  margin-botton: 6px;
+  margin-top: -6px;
+}
+.p-t-history ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+#p-t-hist-label {
+    display: none;
+}
+.p-t-h-entry {
+    font-size: 1em;
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+}
+.p-t-h-True {
+    background-color: #525363;
+    border-radius: 4px;
+    margin:2px;
+    padding: 2px .5em;
+}
+.p-t-h-False {
+    background-color: None;
+}
+.p-t-h-day {
+    font-size: .5em;
+    color: #999;
+}
+.p-t-h-hour {
+    color: #eee;
+}
+
+
+#activity {
+}
+#track-current {
+    font-family: sans serif;
+}
+.tc-title-holder, .tc-info {
+    display: flex;
+    margin-bottom: 8px;
+}
+.tc-title-holder {
+    justify-content: flex-start;
+}
+.tc-info {
+    justify-content: space-between;
+}
+.tc-activity-time {
+    font-family: monospace;
+    font-size: 28px;
+}
+.tc-color-dot {
+    height: 24px;
+    width: 24px;
+    border-radius: 16px;
+    border: 3px solid;
+}
+.tc-activity-note {
+    height: 2em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.tc-activity-name {
+    font-size: 26px;
+    line-height: 32px;
+    vertical-align: middle;
+    white-space: nowrap;
+    padding-left: 4px;
+}
+
+#activity-tracker-recent{
+}
+#activity-tracker-recent h1 {
+    height: 20px;
+    text-align: left;
+    font-size: 24px;
+}
+.atr-calendar {
+    filter: saturate(0.5);
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    bottom: 16px;
+    position: absolute;
+    top: 64px;
+    width: 94%;
+}
+.atr-cal-line {
+    position: absolute;
+    left: 0;
+    height: 1px;
+    background: #ddd;
+    content: "";
+    width: 100%;
+    display: block;
+    opacity: 25%;
+}
+.atr-day {
+    width: 10%;
+    height: 100%;
+    position: relative;
+}
+.atr-block {
+    position: absolute;
+    width: 100%;
+}
+.atr-block.atr-id-sleep {
+    width: calc(100% - 32px);
+    border-left: 16px solid black;
+    border-right: 16px solid black;
+    opacity: 40%;
+}
+#weekly-weather{
+}
+
+.dwe-icon img {
+    width: 28px;
+    margin: 0 auto;
+    filter: invert(1) opacity(0.9);
+}
+.weekly-forcast-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+.daily-weather-entry {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.daily-weather-entry {
+    font-size: 1.2em;
+    font-weight: bold;
+    /*box-shadow: 0 0 6px 0 #ffffff4f;*/
+    padding: 0 2px;
+}
+
+
+
+
+div#now {
+    text-align: center;
+    font-family: sans-serif;
+    background: rgb(16 16 16 / 13%);
+    -webkit-text-stroke: 1px #999;
+}
+
+div#time-curtime {
+    font-family: sans-serif;
+    font-size: 128px;
+    font-weight: bolder;
+}
+
+div#time-curdate {
+    font-size: 32px;
+}
+#time-cursec {
+    position: absolute;
+    opacity: 10%;
+    top: 0; left: 0; bottom: 0; right: 0;
+}
+div#time-sec-progress {
+    background: white;
+    position: absolute;
+    height: 100%;
+    transition: width 1s linear;
+}

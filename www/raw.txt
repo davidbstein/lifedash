@@ -1,0 +1,43 @@
+""{
+  "116781754423992801721": {
+    "id": "116781754423992801721",
+    "picture_url": "https://lh3.googleusercontent.com/a-/AOh14Gj-PaKhzBshw0FuLqX9u_dTEV3_vdz27Ulmny3x3Q",
+    "name": "Emily Moberg",
+    "fname": "Emily",
+    "lat": 40.7392057,
+    "long": -74.0055472,
+    "ts": 1595357388638,
+    "accuracy": 15,
+    "charging": 0,
+    "battery_level": 20
+  },
+  "100848556872240200797": {
+    "id": "100848556872240200797",
+    "picture_url": "https://lh3.googleusercontent.com/a-/AOh14GjiFyHw7IEASSQdAa7LrbcKonaRMf4eMIogrTWJ4ZU",
+    "name": "Stein",
+    "fname": "Stein",
+    "lat": 40.7391893,
+    "long": -74.0055304,
+    "ts": 1595353505515,
+    "accuracy": 14,
+    "charging": 0,
+    "battery_level": 42
+  }
+}{
+  "current_activity": {
+    "currentTracking": {
+      "activity": {
+        "id": "794235",
+        "name": "Email / Spinning / Life Improvement",
+        "color": "#9e9e9e",
+        "integration": "zei"
+      },
+      "startedAt": "2020-07-21T18:45:19.564",
+      "note": {
+        "text": null,
+        "tags": [],
+        "mentions": []
+      }
+    }
+  }
+}""""""""""""""""""

@@ -1,10 +1,10 @@
 import requests
 import json
 import time
-from util import (
+from .util import (
   get_template
 )
-from secrets import (
+from .secrets import (
   SECRETS,
   SETTINGS,
 )
@@ -17,7 +17,7 @@ _SECRETS = SECRETS['GOOGLE_MAPS']
 _SETTINGS = SETTINGS['GOOGLE_MAPS']
 
 
-def _get_raw_map_data():
+def _get_raw_map_data(debug=False):
   if time.time() - _MEMOIZE['time'] < _MEMOIZE_BUFFER_LENGTH:
     return _MEMOIZE['data']
   params = {
@@ -33,6 +33,8 @@ def _get_raw_map_data():
     )
   }
   resp = requests.get(_LOCATION_URL, params=params, cookies=_SECRETS['cookie'])
+  if debug:
+    return resp
   to_ret = json.loads(resp.text[4:])[0]
   _MEMOIZE['time'] = time.time()
   _MEMOIZE['data'] = to_ret

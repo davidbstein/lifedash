@@ -35,7 +35,6 @@ if __name__ == '__main__':
     default=1
   )
   args = parser.parse_args()
-  print("running freq {} script...".format(args.freq))
   if (args.freq == 1):
     called_every_minute()
   elif (args.freq == 15):

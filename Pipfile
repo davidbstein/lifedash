@@ -7,10 +7,14 @@ name = "pypi"
 google-api-python-client = "*"
 requests = "*"
 mistune = "*"
+jupyter = "*"
+garminconnect = "*"
+sdk-timeular-tools = "*"
+requests-oauthlib = "*"
 
 [dev-packages]
 ipython = "*"
 jupyter = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3"

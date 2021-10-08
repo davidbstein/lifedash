@@ -1,0 +1,774 @@
+
+<html>
+<head>
+<link rel="stylesheet" href="/css/chrome.css" type="text/css" />
+<script>
+window.START = new Date();
+setInterval(function(){
+  if (((new Date() - window.START)/1000) > 120) location.reload();
+}, 10000)
+</script>
+</head>
+<body class="hour-17" style="background-image: url('/img/bgs/hours/bg17.jpg')">
+
+<div id='current-weather' class='fieldbox'>
+    
+<div class='cur-stats'>
+    <div class='cur-temp'> 72&deg; </div>
+    <div class='cur-hum'> 70</div>
+</div>
+<div class='cur-icon'><img src='/img/weather/04d.png' /></div>
+<div class='cur-text-info'>
+    <div class='cur-desc'> overcast clouds </div>
+    <div class='cur-forcast'>no change soon</div>
+</div>
+<div class='cur-sun'>
+    <div class='cur-sunrise cur-sun-entry'>
+        <img src='/img/weather/sunrise.png' />
+        <div class='cur-sun-text'>6:59</div>
+    </div>
+    <div class='cur-sunset cur-sun-entry'>
+        <img src='/img/weather/sunset.png' />
+        <div class='cur-sun-text'>18:26</div>
+    </div>
+
+</div>
+
+</div>
+
+<div id='last_update' class='fieldbox'>
+    <div class="field-title">
+        <h1> Last Update </h1>
+    </div>
+    <div class='field-content'>
+        2021-10-08 17:50:16.980849
+    </div>
+</div>
+
+<div id='hourly-weather' class='fieldbox'>
+    
+<div id="w-hourly">
+    
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/04d.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 90.0%"></div>
+        <div class='hwe-filler precip' style="height: 0%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>72&deg;</div>
+        <div class='hwe-stat hwe-pop'>0</div>
+    </div>
+    <div class='hwe-hour'>17h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/04d.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 86.61654135338344%"></div>
+        <div class='hwe-filler precip' style="height: 0%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>72&deg;</div>
+        <div class='hwe-stat hwe-pop'>0</div>
+    </div>
+    <div class='hwe-hour'>18h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/04n.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 84.88721804511273%"></div>
+        <div class='hwe-filler precip' style="height: 0%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>72&deg;</div>
+        <div class='hwe-stat hwe-pop'>0</div>
+    </div>
+    <div class='hwe-hour'>19h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/04n.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 80.52631578947366%"></div>
+        <div class='hwe-filler precip' style="height: 0%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>71&deg;</div>
+        <div class='hwe-stat hwe-pop'>0</div>
+    </div>
+    <div class='hwe-hour'>20h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/04n.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 74.9624060150376%"></div>
+        <div class='hwe-filler precip' style="height: 0%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>70&deg;</div>
+        <div class='hwe-stat hwe-pop'>0</div>
+    </div>
+    <div class='hwe-hour'>21h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/04n.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 68.34586466165408%"></div>
+        <div class='hwe-filler precip' style="height: 0%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>70&deg;</div>
+        <div class='hwe-stat hwe-pop'>0</div>
+    </div>
+    <div class='hwe-hour'>22h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/04n.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 56.315789473684205%"></div>
+        <div class='hwe-filler precip' style="height: 0%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>68&deg;</div>
+        <div class='hwe-stat hwe-pop'>0</div>
+    </div>
+    <div class='hwe-hour'>23h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/04n.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 45.187969924812%"></div>
+        <div class='hwe-filler precip' style="height: 0%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>66&deg;</div>
+        <div class='hwe-stat hwe-pop'>0</div>
+    </div>
+    <div class='hwe-hour'>0h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/04n.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 40.07518796992484%"></div>
+        <div class='hwe-filler precip' style="height: 0%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>66&deg;</div>
+        <div class='hwe-stat hwe-pop'>0</div>
+    </div>
+    <div class='hwe-hour'>1h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/04n.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 33.30827067669172%"></div>
+        <div class='hwe-filler precip' style="height: 0%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>65&deg;</div>
+        <div class='hwe-stat hwe-pop'>0</div>
+    </div>
+    <div class='hwe-hour'>2h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/04n.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 23.30827067669174%"></div>
+        <div class='hwe-filler precip' style="height: 4%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>64&deg;</div>
+        <div class='hwe-stat hwe-pop'>4</div>
+    </div>
+    <div class='hwe-hour'>3h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/04n.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 17.744360902255643%"></div>
+        <div class='hwe-filler precip' style="height: 0%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>63&deg;</div>
+        <div class='hwe-stat hwe-pop'>0</div>
+    </div>
+    <div class='hwe-hour'>4h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/04n.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 13.38345864661656%"></div>
+        <div class='hwe-filler precip' style="height: 0%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>62&deg;</div>
+        <div class='hwe-stat hwe-pop'>0</div>
+    </div>
+    <div class='hwe-hour'>5h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/04n.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 10.0%"></div>
+        <div class='hwe-filler precip' style="height: 0%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>62&deg;</div>
+        <div class='hwe-stat hwe-pop'>0</div>
+    </div>
+    <div class='hwe-hour'>6h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/04n.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 10.601503759398483%"></div>
+        <div class='hwe-filler precip' style="height: 0%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>62&deg;</div>
+        <div class='hwe-stat hwe-pop'>0</div>
+    </div>
+    <div class='hwe-hour'>7h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/04d.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 14.736842105263174%"></div>
+        <div class='hwe-filler precip' style="height: 0%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>62&deg;</div>
+        <div class='hwe-stat hwe-pop'>0</div>
+    </div>
+    <div class='hwe-hour'>8h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/04d.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 24.511278195488707%"></div>
+        <div class='hwe-filler precip' style="height: 12%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>64&deg;</div>
+        <div class='hwe-stat hwe-pop'>12</div>
+    </div>
+    <div class='hwe-hour'>9h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/04d.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 36.165413533834545%"></div>
+        <div class='hwe-filler precip' style="height: 12%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>65&deg;</div>
+        <div class='hwe-stat hwe-pop'>12</div>
+    </div>
+    <div class='hwe-hour'>10h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/10d.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 51.42857142857138%"></div>
+        <div class='hwe-filler precip' style="height: 28%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>67&deg;</div>
+        <div class='hwe-stat hwe-pop'>28</div>
+    </div>
+    <div class='hwe-hour'>11h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/10d.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 53.308270676691684%"></div>
+        <div class='hwe-filler precip' style="height: 28%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>68&deg;</div>
+        <div class='hwe-stat hwe-pop'>28</div>
+    </div>
+    <div class='hwe-hour'>12h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/04d.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 58.646616541353396%"></div>
+        <div class='hwe-filler precip' style="height: 8%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>68&deg;</div>
+        <div class='hwe-stat hwe-pop'>8</div>
+    </div>
+    <div class='hwe-hour'>13h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/10d.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 56.691729323308245%"></div>
+        <div class='hwe-filler precip' style="height: 28%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>68&deg;</div>
+        <div class='hwe-stat hwe-pop'>28</div>
+    </div>
+    <div class='hwe-hour'>14h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/04d.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 55.639097744360875%"></div>
+        <div class='hwe-filler precip' style="height: 45%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>68&deg;</div>
+        <div class='hwe-stat hwe-pop'>45</div>
+    </div>
+    <div class='hwe-hour'>15h</div>
+</div>
+
+<div class='hourly-weather-entry'>
+    <div class='hwe-icon'><img src='/img/weather/04d.png' /></div>
+    <div class='hwe-bar-container'>
+        <div class='hwe-filler temp' style="height: 50.075187969924826%"></div>
+        <div class='hwe-filler precip' style="height: 49%"></div>
+    </div>
+    <div class='hwe-stat-container'>
+        <div class='hwe-stat hwe-temp'>67&deg;</div>
+        <div class='hwe-stat hwe-pop'>49</div>
+    </div>
+    <div class='hwe-hour'>16h</div>
+</div>
+
+</div>
+
+</div>
+
+<div id='weekly-weather' class='fieldbox'>
+    
+<div class='weekly-forcast-entry'>
+    
+<div class='daily-weather-entry'>
+    <div class='dwe-high'>69&deg</div>
+    <div class='dwe-icon'><img src="/img/weather/10d.png" /></div>
+    <div class='dwe-low'>63&deg</div>
+    <div class='dwe-dow'>Sa</div>
+</div>
+
+<div class='daily-weather-entry'>
+    <div class='dwe-high'>67&deg</div>
+    <div class='dwe-icon'><img src="/img/weather/10d.png" /></div>
+    <div class='dwe-low'>65&deg</div>
+    <div class='dwe-dow'>Su</div>
+</div>
+
+<div class='daily-weather-entry'>
+    <div class='dwe-high'>73&deg</div>
+    <div class='dwe-icon'><img src="/img/weather/10d.png" /></div>
+    <div class='dwe-low'>64&deg</div>
+    <div class='dwe-dow'>Mo</div>
+</div>
+
+<div class='daily-weather-entry'>
+    <div class='dwe-high'>73&deg</div>
+    <div class='dwe-icon'><img src="/img/weather/10d.png" /></div>
+    <div class='dwe-low'>68&deg</div>
+    <div class='dwe-dow'>Tu</div>
+</div>
+
+<div class='daily-weather-entry'>
+    <div class='dwe-high'>80&deg</div>
+    <div class='dwe-icon'><img src="/img/weather/03d.png" /></div>
+    <div class='dwe-low'>67&deg</div>
+    <div class='dwe-dow'>We</div>
+</div>
+
+<div class='daily-weather-entry'>
+    <div class='dwe-high'>78&deg</div>
+    <div class='dwe-icon'><img src="/img/weather/04d.png" /></div>
+    <div class='dwe-low'>66&deg</div>
+    <div class='dwe-dow'>Th</div>
+</div>
+
+<div class='daily-weather-entry'>
+    <div class='dwe-high'>80&deg</div>
+    <div class='dwe-icon'><img src="/img/weather/04d.png" /></div>
+    <div class='dwe-low'>67&deg</div>
+    <div class='dwe-dow'>Fr</div>
+</div>
+
+</div>
+
+</div>
+
+<div id='now' class='fieldbox'>
+    
+<div id='time-curtime'>17:50</div>
+<div id='time-cursec'><div id='time-sec-progress' style=''></div> </div>
+<div id='time-curdate'>Fri, Oct 08, 2021</div>
+
+<script>
+  function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    ps = (Date.now() / 10 % 6000) / 60;
+    document.getElementById('time-curtime').innerHTML = h + ":" + m;
+    document.getElementById('time-sec-progress')
+        .setAttribute("style", (m%2 ? `width:${ps}%; left:0`: `width:${100-ps}%; right:0`) + (ps<3?'width:0':''));
+    var t = setTimeout(startTime, 500);
+  }
+  function checkTime(i) {
+    if (i < 10) {i = "0" + i};
+    return i;
+  }
+  startTime();
+</script>
+
+</div>
+
+<div id='activity' class='fieldbox'>
+    
+<div id='track-current'>
+    <div class='tc-title-holder'>
+        <div class='tc-color-dot' style="background:#9e9e9e77; border-color:#9e9e9e"></div>
+        <div class='tc-activity-name'>Timed Break</div>
+    </div>
+    <div class='tc-info'>
+        <div class='tc-activity-note'></div>
+        <div class='tc-activity-time'>0h:48m</div>
+    </div>
+</div>
+
+</div>
+
+<div id='activity-history' class='fieldbox'>
+    
+<div id='activity-tracker-recent'> 
+<h1> 1-week activity history </h1>
+<div class='atr-calendar'>
+  <div class='atr-cal-line' style="top:0%" ></div>
+  <div class='atr-cal-line' style="top:25%" ></div>
+  <div class='atr-cal-line' style="top:50%" ></div>
+  <div class='atr-cal-line' style="top:75%" ></div>
+  <div class='atr-cal-line' style="top:100%" ></div>
+    
+<div class='atr-day'>
+    
+</div>
+
+<div class='atr-day'>
+    
+<div class='atr-block atr-id-794235' style='top: 78.0613425925926%; bottom: 18.402777777777786%; background: #9e9e9e;'><!-- [0.780613425925926, 0.8159722222222222, {"id": "794235", "name": "Organization and meta-work", "color": "#9e9e9e", "integration": "zei", "spaceId": "79888", "deviceSide": null}, {"text": null, "tags": [], "mentions": []}, {"startedAt": "2021-10-03T22:44:05.725", "stoppedAt": "2021-10-03T23:35:00.000"}] -->
+</div>
+
+<div class='atr-block atr-id-1102741' style='top: 76.58449074074073%; bottom: 21.938657407407405%; background: #9e9e9e;'><!-- [0.7658449074074074, 0.780613425925926, {"id": "1102741", "name": "Timed Break", "color": "#9e9e9e", "integration": "zei", "spaceId": "111986", "deviceSide": null}, {"text": null, "tags": [], "mentions": []}, {"startedAt": "2021-10-03T22:22:49.095", "stoppedAt": "2021-10-03T22:44:05.725"}] -->
+</div>
+
+<div class='atr-block atr-id-1095713' style='top: 63.35532407407407%; bottom: 31.46875%; background: #374046;'><!-- [0.6335532407407407, 0.6853125, {"id": "1095713", "name": "Unproductive Play", "color": "#374046", "integration": "zei", "spaceId": "111986", "deviceSide": 5}, {"text": null, "tags": [], "mentions": []}, {"startedAt": "2021-10-03T19:12:19.520", "stoppedAt": "2021-10-03T20:26:51.591"}] -->
+</div>
+
+<div class='atr-block atr-id-1149200' style='top: 96.79166666666667%; bottom: 0%; background: #0f9587;'><!-- [0.9679166666666666, 1, {"id": "1149200", "name": "Privacy Policy Coding Project", "color": "#0f9587", "integration": "zei", "spaceId": "120576", "deviceSide": null}, {"text": null, "tags": [], "mentions": []}, {"startedAt": "2021-10-04T03:13:48.882", "stoppedAt": "2021-10-04T06:45:00.000"}] -->
+</div>
+
+<div class='atr-block atr-id-1149211' style='top: 73.06018518518519%; bottom: 23.425925925925924%; background: #9b2bae;'><!-- [0.7306018518518519, 0.7657407407407407, {"id": "1149211", "name": "Homework / Studying", "color": "#9b2bae", "integration": "zei", "spaceId": "120581", "deviceSide": 7}, {"text": null, "tags": [], "mentions": []}, {"startedAt": "2021-10-03T21:32:04.135", "stoppedAt": "2021-10-03T22:22:40.566"}] -->
+</div>
+
+<div class='atr-block atr-id-1149211' style='top: 82.13425925925925%; bottom: 13.050925925925924%; background: #9b2bae;'><!-- [0.8213425925925926, 0.8694907407407407, {"id": "1149211", "name": "Homework / Studying", "color": "#9b2bae", "integration": "zei", "spaceId": "120581", "deviceSide": 7}, {"text": null, "tags": [], "mentions": []}, {"startedAt": "2021-10-03T23:42:44.551", "stoppedAt": "2021-10-04T00:52:04.414"}] -->
+</div>
+
+<div class='atr-block atr-id-1149211' style='top: 87.84722222222221%; bottom: 11.193287037037038%; background: #9b2bae;'><!-- [0.8784722222222222, 0.8880671296296296, {"id": "1149211", "name": "Homework / Studying", "color": "#9b2bae", "integration": "zei", "spaceId": "120581", "deviceSide": 7}, {"text": null, "tags": [], "mentions": []}, {"startedAt": "2021-10-04T01:05:00.000", "stoppedAt": "2021-10-04T01:18:49.278"}] -->
+</div>
+
+<div class='atr-block atr-id-1149211' style='top: 88.90277777777777%; bottom: 9.12731481481481%; background: #9b2bae;'><!-- [0.8890277777777778, 0.9087268518518519, {"id": "1149211", "name": "Homework / Studying", "color": "#9b2bae", "integration": "zei", "spaceId": "120581", "deviceSide": 7}, {"text": null, "tags": [], "mentions": []}, {"startedAt": "2021-10-04T01:20:12.090", "stoppedAt": "2021-10-04T01:48:34.114"}] -->
+</div>
+
+</div>
+
+<div class='atr-day'>
+    
+<div class='atr-block atr-id-1095713' style='top: 11.458333333333332%; bottom: 85.4363425925926%; background: #374046;'><!-- [0.11458333333333333, 0.14563657407407407, {"id": "1095713", "name": "Unproductive Play", "color": "#374046", "integration": "zei", "spaceId": "111986", "deviceSide": 5}, {"text": null, "tags": [], "mentions": []}, {"startedAt": "2021-10-04T06:45:00.000", "stoppedAt": "2021-10-04T07:29:43.515"}] -->
+</div>
+
+<div class='atr-block atr-id-1149212' style='top: 59.02777777777778%; bottom: 34.722222222222214%; background: #6f1c7d;'><!-- [0.5902777777777778, 0.6527777777777778, {"id": "1149212", "name": "Lecture", "color": "#6f1c7d", "integration": "zei", "spaceId": "120581", "deviceSide": null}, {"text": null, "tags": [], "mentions": []}, {"startedAt": "2021-10-04T18:10:00.000", "stoppedAt": "2021-10-04T19:40:00.000"}] -->
+</div>
+
+<div class='atr-block atr-id-1149212' style='top: 70.83333333333334%; bottom: 25.0%; background: #6f1c7d;'><!-- [0.7083333333333334, 0.75, {"id": "1149212", "name": "Lecture", "color": "#6f1c7d", "integration": "zei", "spaceId": "120581", "deviceSide": null}, {"text": null, "tags": [], "mentions": []}, {"startedAt": "2021-10-04T21:00:00.000", "stoppedAt": "2021-10-04T22:00:00.000"}] -->
+</div>
+
+<div class='atr-block atr-id-1149200' style='top: 0%; bottom: 88.54166666666667%; background: #0f9587;'><!-- [0, 0.11458333333333333, {"id": "1149200", "name": "Privacy Policy Coding Project", "color": "#0f9587", "integration": "zei", "spaceId": "120576", "deviceSide": null}, {"text": null, "tags": [], "mentions": []}, {"startedAt": "2021-10-04T03:13:48.882", "stoppedAt": "2021-10-04T06:45:00.000"}] -->
+</div>
+
+</div>
+
+<div class='atr-day'>
+    
+<div class='atr-block atr-id-1102741' style='top: 83.83912037037037%; bottom: 14.65856481481481%; background: #9e9e9e;'><!-- [0.8383912037037037, 0.8534143518518519, {"id": "1102741", "name": "Timed Break", "color": "#9e9e9e", "integration": "zei", "spaceId": "111986", "deviceSide": null}, {"text": null, "tags": [], "mentions": []}, {"startedAt": "2021-10-06T00:07:17.992", "stoppedAt": "2021-10-06T00:28:55.420"}] -->
+</div>
+
+<div class='atr-block atr-id-1153152' style='top: 85.38425925925925%; bottom: 0%; background: #795549;'><!-- [0.8538425925925925, 1, {"id": "1153152", "name": "Job hunt", "color": "#795549", "integration": "zei", "spaceId": "121039", "deviceSide": 2}, {"text": null, "tags": [], "mentions": []}, {"startedAt": "2021-10-06T00:29:32.270", "stoppedAt": "2021-10-06T05:01:56.000"}] -->
+</div>
+
+<div class='atr-block atr-id-1149211' style='top: 83.10185185185185%; bottom: 16.164351851851848%; background: #9b2bae;'><!-- [0.8310185185185185, 0.8383564814814815, {"id": "1149211", "name": "Homework / Studying", "color": "#9b2bae", "integration": "zei", "spaceId": "120581", "deviceSide": 7}, {"text": null, "tags": [], "mentions": []}, {"startedAt": "2021-10-05T23:56:40.775", "stoppedAt": "2021-10-06T00:07:14.166"}] -->
+</div>
+
+<div class='atr-block atr-id-1149211' style='top: 79.25%; bottom: 17.29398148148148%; background: #9b2bae;'><!-- [0.7925, 0.8270601851851852, {"id": "1149211", "name": "Homework / Studying", "color": "#9b2bae", "integration": "zei", "spaceId": "120581", "deviceSide": 7}, {"text": "brea", "tags": [], "mentions": []}, {"startedAt": "2021-10-05T23:01:12.462", "stoppedAt": "2021-10-05T23:50:58.601"}] -->
+</div>
+
+</div>
+
+<div class='atr-day'>
+    
+<div class='atr-block atr-id-1095714' style='top: 79.31944444444444%; bottom: 14.143518518518519%; background: #374046;'><!-- [0.7931944444444444, 0.8585648148148148, {"id": "1095714", "name": "Productive Play", "color": "#374046", "integration": "zei", "spaceId": "111986", "deviceSide": null}, {"text": null, "tags": [], "mentions": []}, {"startedAt": "2021-10-06T23:02:12.101", "stoppedAt": "2021-10-07T00:36:20.316"}] -->
+</div>
+
+<div class='atr-block atr-id-1153152' style='top: 0%; bottom: 95.69907407407408%; background: #795549;'><!-- [0, 0.04300925925925926, {"id": "1153152", "name": "Job hunt", "color": "#795549", "integration": "zei", "spaceId": "121039", "deviceSide": 2}, {"text": null, "tags": [], "mentions": []}, {"startedAt": "2021-10-06T00:29:32.270", "stoppedAt": "2021-10-06T05:01:56.000"}] -->
+</div>
+
+</div>
+
+<div class='atr-day'>
+    
+</div>
+
+<div class='atr-day'>
+    
+<div class='atr-block atr-id-1095714' style='top: 66.55092592592592%; bottom: 31.159722222222214%; background: #374046;'><!-- [0.6655092592592593, 0.6884027777777778, {"id": "1095714", "name": "Productive Play", "color": "#374046", "integration": "zei", "spaceId": "111986", "deviceSide": null}, {"text": null, "tags": [], "mentions": []}, {"startedAt": "2021-10-08T19:58:20.327", "stoppedAt": "2021-10-08T20:31:18.399"}] -->
+</div>
+
+</div>
+ 
+</div>
+</div>
+
+</div>
+
+<div id='agenda' class='fieldbox'>
+    
+<div id='agenda-container'>
+<h2> Today - Friday, October 08 </h2>
+
+<div class="a-e-event-list">
+    
+<div class='agenda-entry a-e-status-DONE'>
+    <div class="a-e-name a-e-rsvp-OWNER"> Patent Law </div>
+    <div class='a-e-dots'></div> 
+    <div class="a-e-start"> 12:20 </div>
+    <div> - </div> 
+    <div class="a-e-end"> 1420 </div>
+</div>
+
+<div class='agenda-entry a-e-status-DONE'>
+    <div class="a-e-name a-e-rsvp-OWNER"> 12.000 MWF </div>
+    <div class='a-e-dots'></div> 
+    <div class="a-e-start"> 15:00 </div>
+    <div> - </div> 
+    <div class="a-e-end"> 1600 </div>
+</div>
+
+</div>
+
+<h2> Tomorrow - Saturday, October 09 </h2>
+
+<div class="a-e-event-list">
+    
+<div class='agenda-entry a-e-status-UPCOMING'>
+    <div class="a-e-name a-e-rsvp-OWNER"> Call Bill  </div>
+    <div class='a-e-dots'></div> 
+    <div class="a-e-start"> 18:00 </div>
+    <div> - </div> 
+    <div class="a-e-end"> 1900 </div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div id='fitness' class='fieldbox'>
+    
+<div id='fitness-bar-container'>
+    THIS IS WHERE THE FITNESS BAR GOES
+</div>
+
+</div>
+
+<div id='pill-timing' class='fieldbox'>
+    
+<div id='pill-timing-container'>
+  
+<div class='p-t-current'>
+  <div class='p-t-start'> 
+    Pill Started: 12:13 
+  </div>
+  <div class='p-t-age'> 
+    Total: 05:36 
+  </div>
+</div>
+
+  
+<div class='p-t-history'> 
+  <div id='p-t-hist-label'>History:</div>
+  <ul>
+    
+<li class='p-t-h-True p-t-h-entry'>
+<div class='p-t-h-day'>
+  S25
+</div>
+<div class='p-t-h-hour'>
+  11:53
+</div>
+</li>
+
+<li class='p-t-h-True p-t-h-entry'>
+<div class='p-t-h-day'>
+  S26
+</div>
+<div class='p-t-h-hour'>
+  11:13
+</div>
+</li>
+
+<li class='p-t-h-True p-t-h-entry'>
+<div class='p-t-h-day'>
+  M27
+</div>
+<div class='p-t-h-hour'>
+  12:43
+</div>
+</li>
+
+<li class='p-t-h-True p-t-h-entry'>
+<div class='p-t-h-day'>
+  T28
+</div>
+<div class='p-t-h-hour'>
+  10:54
+</div>
+</li>
+
+<li class='p-t-h-True p-t-h-entry'>
+<div class='p-t-h-day'>
+  W29
+</div>
+<div class='p-t-h-hour'>
+  08:57
+</div>
+</li>
+
+<li class='p-t-h-True p-t-h-entry'>
+<div class='p-t-h-day'>
+  T30
+</div>
+<div class='p-t-h-hour'>
+  10:32
+</div>
+</li>
+
+<li class='p-t-h-False p-t-h-entry'>
+<div class='p-t-h-day'>
+   
+</div>
+<div class='p-t-h-hour'>
+   
+</div>
+</li>
+
+<li class='p-t-h-False p-t-h-entry'>
+<div class='p-t-h-day'>
+   
+</div>
+<div class='p-t-h-hour'>
+   
+</div>
+</li>
+
+<li class='p-t-h-True p-t-h-entry'>
+<div class='p-t-h-day'>
+  S03
+</div>
+<div class='p-t-h-hour'>
+  13:04
+</div>
+</li>
+
+<li class='p-t-h-False p-t-h-entry'>
+<div class='p-t-h-day'>
+   
+</div>
+<div class='p-t-h-hour'>
+   
+</div>
+</li>
+
+<li class='p-t-h-True p-t-h-entry'>
+<div class='p-t-h-day'>
+  T05
+</div>
+<div class='p-t-h-hour'>
+  10:48
+</div>
+</li>
+
+<li class='p-t-h-True p-t-h-entry'>
+<div class='p-t-h-day'>
+  W06
+</div>
+<div class='p-t-h-hour'>
+  13:55
+</div>
+</li>
+
+<li class='p-t-h-False p-t-h-entry'>
+<div class='p-t-h-day'>
+   
+</div>
+<div class='p-t-h-hour'>
+   
+</div>
+</li>
+
+<li class='p-t-h-True p-t-h-entry'>
+<div class='p-t-h-day'>
+  F08
+</div>
+<div class='p-t-h-hour'>
+  12:13
+</div>
+</li>
+
+  </ul>
+</div>
+
+</div>
+
+</div>
+
+</pre>
+</div>
+</body>
+</html>
