@@ -9,7 +9,7 @@ setInterval(function(){{
 }}, 10000)
 </script>
 </head>
-<body class="hour-{hour}" style="background-image: url('/img/bgs/hours/bg{hour}.jpg')">
+<body class="hour-{hour}" style="background-image: url('/img/bgs/hours/bgTODO{hour}.jpg')">
 {content}
 </pre>
 </div>
@@ -214,6 +214,11 @@ AGENDA_ENTRY = """
 PILL_TIMING_TEMPLATE = """
 <div id='pill-timing-container'>
   {current_pill}
+</div>
+"""
+
+PILL_HISTORY_TEMPLATE = """
+<div id='pill-history-container'>
   {timing_history}
 </div>
 """
@@ -221,10 +226,20 @@ PILL_TIMING_TEMPLATE = """
 PILL_TIMING_CURRENT = """
 <div class='p-t-current'>
   <div class='p-t-start'> 
-    Pill Started: {current_pill_time:%H:%M} 
+    <div class='p-t-label'>
+        Pill Taken At: 
+    </div>
+    <div class='p-t-time'>
+        {current_pill_time:%H:%M} 
+    </div>
   </div>
   <div class='p-t-age'> 
-    Total: {current_pill_age} 
+    <div class='p-t-label'>
+        Elapsed Pill Time: 
+    </div>
+    <div class='p-t-elapsed'>
+        {current_pill_age} 
+    </div>
   </div>
 </div>
 """

@@ -25,7 +25,7 @@ def write_to_www(field, html="", title=None):
         f.write(json.dumps(page_data))
     update_www()
     
-def update_www():
+def update_www(data=None):
     with open("/home/pi/lifedash/www/raw.json", 'r') as f:
         page_data = json.loads(f.read())
     with open("/home/pi/lifedash/www/index.html", 'w') as f:

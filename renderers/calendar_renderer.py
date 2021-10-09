@@ -6,6 +6,7 @@ from renderers.templates import (
     AGENDA_EVENT_LIST,
     AGENDA_ENTRY,
     PILL_TIMING_TEMPLATE,
+    PILL_HISTORY_TEMPLATE,
     PILL_TIMING_CURRENT,
     PILL_TIMING_NO_CURRENT,
     PILL_TIMING_HISTORY,
@@ -35,7 +36,7 @@ def render_agenda(calendar_data):
     )
 
 def format_pill_history(pill_history):
-    HISTORY_LEN = 14
+    HISTORY_LEN = 7 * 3
     today = datetime.date.today()
     pill_times = [None for i in range(HISTORY_LEN)]
     for pill_ts in pill_history:
@@ -57,11 +58,11 @@ def format_pill_history(pill_history):
 def format_timedelta(td):
     hours = (td.seconds // (60*60)) % 24
     mins = (td.seconds // 60) % 60
-    return f"{hours:02}:{mins:02}"
+    return f"{hours:02}h {mins:02}m"
 
-def render_pill_timing(calendar_data):
+def get_pill_data(calendar_data):
     pill_ts_list=sorted(calendar_data.get("events", {}).get("pills", []))
-    if not pill_ts_list or ((time.time() - pill_ts_list[-1]) / (60*60)) > 12:
+    if not pill_ts_list or ((time.time() - pill_ts_list[-1]) / (60*60)) > 24:
         current_pill = PILL_TIMING_NO_CURRENT
     else:
         cur_pill_start = datetime.datetime.fromtimestamp(pill_ts_list[-1])
@@ -69,7 +70,17 @@ def render_pill_timing(calendar_data):
             current_pill_time=cur_pill_start,
             current_pill_age=format_timedelta(datetime.datetime.now() - cur_pill_start)
         )
+    return {
+        'current_pill': current_pill,
+        'pill_ts_list': pill_ts_list,
+    }
+    
+def render_pill_timing(calendar_data):
     return PILL_TIMING_TEMPLATE.format(
-        current_pill=current_pill,
-        timing_history=format_pill_history(pill_ts_list)
+        current_pill=get_pill_data(calendar_data)['current_pill']
+    )
+
+def render_pill_history(calendar_data):
+    return PILL_HISTORY_TEMPLATE.format(
+        timing_history=format_pill_history(get_pill_data(calendar_data)['pill_ts_list'])
     )

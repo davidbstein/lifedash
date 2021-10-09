@@ -5,4 +5,5 @@ from .templates import (
 
 
 def render_fitness_bar(garmin_data):
-   return FITNESS_BAR_TEMPLATE.format({})
+    #['activities', 'sleeps', 'epochs', 'dailies', 'bodyComps', 'userMetrics']
+    return FITNESS_BAR_TEMPLATE.format({})

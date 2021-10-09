@@ -43,27 +43,20 @@ def get_or_reload(name, reload_fn, timeout_in_minutes):
         obj = save_object(name, to_save)
     return obj
 
-def get_historical(name, reload_fn, timestamp, max_age, now):
-    timestamp_age = now - timestamp
-    if timestamp_age > max_age:
+def get_historical(name, reload_fn, timestamp, max_age, now, obj=None):
+    if timestamp < now - max_age:
         return {}
-    obj = get_object(name)
-    cur_values = obj.get("_value", [])
-    final_values = []
-    timestamp_found = False
-    for capture_time, value in cur_values:
-        cur_age = now - capture_time
-        if cur_age > max_age:
-            continue
-        if capture_time == timestamp:
-            return value
-        if (capture_time > timestamp) and not timestamp_found:
-            to_ret = reload_fn()
-            final_values.append([timestamp, to_ret])
-            timestamp_found = True
-        final_values.append([capture_time, value])
-    if not timestamp_found:
-        to_ret = reload_fn()
-        final_values.append([timestamp, to_ret])
-    save_object(name, {"_value": list(sorted(final_values))})
-    return to_ret
+    if obj == None:
+        obj = get_object(name)
+    cached_vals = {ts:v for ts,v in obj.get("_values", []) if ts >= now - max_age}
+    if timestamp in cached_vals.keys():
+        return {"value": cached_vals[timestamp], "_obj": obj}
+    print("NOTHING IN CACHE")
+    cached_vals[timestamp] = reload_fn()
+    obj = {"_values": list(cached_vals.items())}
+    save_object(name, obj)
+    return {
+        "value": cached_vals[timestamp],
+        "_obj": obj,
+    }
+        
