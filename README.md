@@ -34,3 +34,16 @@ NOTE: scrapers will get called every minute. Use a cache to avoid getting rate l
     - each update function is isolated. If one breaks, the rest will keep running.
  4. have the updater call your new renderer.
     - Any HTML passed to the `write_to_www` function will appear on the dashabord.
+
+
+## Setup on Raspberry Pi
+
+  1. `apt install xdotool`
+  1. Check out repo into home directory
+  1. Set up `secrets.json` and `settings.json`
+  1. Check data sources in the `do_update` function in `updater.py`
+  1. set up browser kiosk for autostart: `cp system_scripts/lib_systemd_system_kiosk /lib/systemd/system/kiosk`
+  1. set up server run script: `cp system_scripts/lib_systemd_system_webserver /lib/systemd/system/webserver`
+  1. Start the servers `sudo service kiosk restart; sudo service webserver restart`
+
+for logs, use `journalctl`. E.g.,  `grc journalctl -f -n100`
