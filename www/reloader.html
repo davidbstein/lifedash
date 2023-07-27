@@ -1,0 +1,11 @@
+<html>
+  <script>
+    (function(){
+    const reference = window.open("http://dashboard-pi:8765", "target");
+    function reload(){
+	reference.location.reload();
+    }
+	window.setInterval(reload.bind(this), 60*1000);
+    })();
+  </script>
+</html>

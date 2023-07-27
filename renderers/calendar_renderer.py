@@ -5,6 +5,7 @@ from renderers.templates import (
     AGENDA_TEMPLATE,
     AGENDA_EVENT_LIST,
     AGENDA_ENTRY,
+    PILL_COMBINED_TEMPLATE,
     PILL_TIMING_TEMPLATE,
     PILL_HISTORY_TEMPLATE,
     PILL_TIMING_CURRENT,
@@ -13,6 +14,14 @@ from renderers.templates import (
     PILL_TIMING_HISTORY_ENTRY,
 )
 
+DEFAULT_PILL_SIZE = 30
+PILL_TIMES = {
+    '30': datetime.timedelta(hours=10),
+    '25': datetime.timedelta(hours=9),
+    '20': datetime.timedelta(hours=8),
+    '10': datetime.timedelta(hours=2),
+    'other': datetime.timedelta(hours=3),
+}
 def format_event_list(el):
     to_ret = []
     for e in sorted(el, key=lambda e: e['start']):
@@ -38,20 +47,21 @@ def render_agenda(calendar_data):
 def format_pill_history(pill_history):
     HISTORY_LEN = 7 * 3
     today = datetime.date.today()
-    pill_times = [None for i in range(HISTORY_LEN)]
-    for pill_ts in pill_history:
-        dt = datetime.datetime.fromtimestamp(pill_ts)
+    pill_ts_and_details = [(None, None) for i in range(HISTORY_LEN)]
+    for pill_detail in pill_history:
+        dt = datetime.datetime.fromtimestamp(pill_detail.get('timestamp'))
         days_ago = (today-dt.date()).days
         if days_ago >= HISTORY_LEN:
             continue
-        pill_times[days_ago] = dt
+        pill_ts_and_details[days_ago] = (dt, pill_detail.get("pillSize", DEFAULT_PILL_SIZE))
     return PILL_TIMING_HISTORY.format(
         pill_history=''.join([
             PILL_TIMING_HISTORY_ENTRY.format(
                 taken=bool(pill_time),
                 taken_day=f"{pill_time:%a}"[0] + f"{pill_time:%d}" if pill_time else " ",
-                taken_hour=f"{pill_time:%H:%M}" if pill_time else " "
-            ) for pill_time in reversed(pill_times)
+                taken_hour=f"{pill_time:%H:%M}" if pill_time else " ",
+                taken_size=str(pill_size)
+            ) for pill_time, pill_size in reversed(pill_ts_and_details)
         ])
     )
 
@@ -61,18 +71,25 @@ def format_timedelta(td):
     return f"{hours:02}h {mins:02}m"
 
 def get_pill_data(calendar_data):
-    pill_ts_list=sorted(calendar_data.get("events", {}).get("pills", []))
-    if not pill_ts_list or ((time.time() - pill_ts_list[-1]) / (60*60)) > 24:
+    pill_history=sorted(calendar_data.get("pillDetail", []), key=lambda pd: pd.get("timestamp"))
+    last_pill = (pill_history and pill_history[-1]) or {}
+    last_pill_ts = last_pill.get("timestamp", 0)
+    if not pill_history or ((time.time() - last_pill_ts) / (60*60)) > 24:
         current_pill = PILL_TIMING_NO_CURRENT
     else:
-        cur_pill_start = datetime.datetime.fromtimestamp(pill_ts_list[-1])
+        cur_pill_start = datetime.datetime.fromtimestamp(last_pill_ts)
+        cur_pill_size = str(last_pill.get("pillSize", DEFAULT_PILL_SIZE))
+        cur_pill_age = datetime.datetime.now() - cur_pill_start
+        cur_pill_length = PILL_TIMES.get(cur_pill_size) or datetime.timedelta(hours=10)
         current_pill = PILL_TIMING_CURRENT.format(
             current_pill_time=cur_pill_start,
-            current_pill_age=format_timedelta(datetime.datetime.now() - cur_pill_start)
+            current_pill_age=format_timedelta(cur_pill_age),
+            current_pill_size=cur_pill_size,
+            current_pill_remaining=(cur_pill_length-cur_pill_age).total_seconds() / cur_pill_length.total_seconds()
         )
     return {
         'current_pill': current_pill,
-        'pill_ts_list': pill_ts_list,
+        'pill_history': pill_history
     }
     
 def render_pill_timing(calendar_data):
@@ -82,5 +99,11 @@ def render_pill_timing(calendar_data):
 
 def render_pill_history(calendar_data):
     return PILL_HISTORY_TEMPLATE.format(
-        timing_history=format_pill_history(get_pill_data(calendar_data)['pill_ts_list'])
+        timing_history=format_pill_history(get_pill_data(calendar_data)['pill_history'])
+    )
+
+def render_pill_combined(calendar_data):
+    return PILL_COMBINED_TEMPLATE.format(
+        current_pill=get_pill_data(calendar_data)['current_pill'],
+        timing_history=format_pill_history(get_pill_data(calendar_data)['pill_history'])
     )

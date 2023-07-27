@@ -39,7 +39,7 @@ def _current_activity():
     return resp
 
 
-def _recent_activity(days=7):
+def _recent_activity(days=14):
     token = get_or_reload('timeular_token', get_token, 120)['token']
     headers={"Authorization": "Bearer {}".format(token)}
     timerange = dict(

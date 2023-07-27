@@ -1,32 +1,93 @@
-html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {	margin: 0;	padding: 0;	border: 0;	font-size: 100%;	font: inherit;	vertical-align: baseline;}/* HTML5 display-role reset for older browsers */article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {	display: block;}body {	line-height: 1;}ol, ul {	list-style: none;}blockquote, q {	quotes: none;}blockquote:before, blockquote:after,q:before, q:after {	content: '';	content: none;}table {	border-collapse: collapse;	border-spacing: 0;}
-
+html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li, fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {	margin: 0;	padding: 0;	border: 0;	font-size: 100%;	font: inherit;	vertical-align: baseline;}/* HTML5 display-role reset for older browsers */article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {	display: block;}body {	line-height: 1;}ol, ul {	list-style: none;}blockquote, q {	quotes: none;}blockquote:before, blockquote:after,q:before, q:after {	content: '';	content: none;}table {	border-collapse: collapse;	border-spacing: 0;}
 
 
 body {
-    margin: 0;;
+    --height: min(100vh, calc( 600vw / 9));
+    --quarter-unit: calc( 0.0036 * var(--height));
+    --unit: calc( 4 * var(--quarter-unit)); /* originally 16px */
+    --padding: var(--unit);
+
+    --pill-color: #0c0044;
+
+    margin: 0;
+    background-color: black;
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
-
-    font-family: sans;
-    width: calc(1900px - 32px - (4 * 16px));
-    height: calc(1080px - 32px - (3 * 16px));
-    display: grid;
-    grid-template-columns: [cstart] 10% 20% [cleft] 20% 20% [cright] 20% 10% [cend];
-    grid-template-rows: [rtop] 20% [rtopbar] 10% [rstatus] 10% 10% [rhistory] 40% [rbase] 10% [rend];
-    gap: 16px;
-    margin: 16px;
+    overflow: hidden;
+    font-family: sans-serif;
+    width: 100%;  height: 100%;
+    font-size: var(--unit);
 }
+
+.container {
+    position: absolute;
+    width: 100vw;
+    height: var(--height);
+    display: grid;
+    grid-template-columns: [cstart] 1fr 1fr [cleft] 2fr 2fr [cright] 1fr 1fr [cend];
+    grid-template-rows: [rtop] 4fr [rtopbar] 2fr [rstatus] 2fr 2fr [rhistory] 2fr 2fr 2fr 2fr [rbase] 1fr [rend];
+    overflow:hidden;
+    gap: var(--padding);
+}
+
 .fieldbox {
     overflow: hidden;
-    padding: 1em;
-    backdrop-filter: blur(15px);
-    background: rgba(0,0,0, 0.2);
+    max-height: 100%; max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: var(--padding);;
+    backdrop-filter: blur(var(--unit));
+    -webkit-backdrop-filter: blur(var(--unit));
+    background: rgba(1,1,1, 0.2);
     color: white;
-    border-radius: 16px;
-    box-shadow: 8px 8px 16px 0px rgba(0,0,0,.5);
+    border-radius: var(--unit);
+    box-shadow: calc(.5 * var(--unit)) calc(.5 * var(--unit)) var(--unit) 0px rgba(0,0,0,.5);
+    position: relative;
+    order: 9999;
 }
+
+
+@media (max-aspect-ratio: 4/5) {
+    body {
+	--height: min(100vh);
+	overflow-y: scroll;
+	background: #933 !important;
+    }
+    .container {
+	display: flex;
+	flex-direction: column;
+	height: fit-content;
+	width: 100%;
+	margin: 0;
+	margin-top: 1em;
+    }
+    .fieldbox {
+	border-radius: 0px;
+	border: 1px solid black;
+	overflow: auto;
+	background: #333;
+	margin: 0 1em;
+    }
+    #citibike-status #citibike-status-container{
+	flex-wrap: wrap;
+	width: 100%;
+	gap: var(--padding);
+    }
+    #citibike-status .cb-s-station {
+	padding: var(--quarter-unit);
+	font-size: 1.5em;
+	width: default;
+	min-width: 20%;
+    }
+    #david-fitness-combined,
+    #emily-fitness-combined,
+    #activity-history,
+    #pill-combined {
+	min-height: 15vh;
+    }
+}
+
 
 body.hour-2 {
     background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(/img/bgs/hours/bg2.jpg) !important;
@@ -36,8 +97,8 @@ body.hour-2 {
 /* .fieldbox { overflow: scroll; } */
 h1 {
     text-align: center;
-    font-size: 32px;
-    margin-bottom: 8px;
+    font-size: calc(2 * var(--unit));;
+    margin-bottom: calc(.5 * var(--unit));
 }
 
 #location {
@@ -46,6 +107,7 @@ h1 {
 }
 
 #activity {
+    order: 2;
     grid-column: 1 / cleft;
     grid-row: 2 / 3;
 }
@@ -66,6 +128,7 @@ h1 {
 }
 
 #hourly-weather {
+    order: 10;
     grid-column: 2 / 4;
     grid-row: rtop / 2;
 }
@@ -78,15 +141,17 @@ h1 {
     grid-column: 6 / cend;
     grid-row: rbase / rend;
 }
-
-#agenda {
-    grid-column: 1/cleft;
-    grid-row: rhistory / rbase;
-}
-#fitness {
-    grid-column: 1 / 6;
+#citibike-status {
+    order: 1;
+    grid-column: cleft / 6;
     grid-row: rbase / rend;
 }
+#agenda {
+    order: 2;
+    grid-column: 1/cleft;
+    grid-row: rhistory / rend;
+}
+/**
 #pill-timing {
     grid-column: cright / cend;
     grid-row: rtopbar / rstatus;
@@ -95,14 +160,60 @@ h1 {
     grid-column: cright / cend;
     grid-row: rstatus / 3;
 }
-
-
-#last_update {
+#readiness {
+    grid-column: cright / cend;
+    grid-row: 5 / 6;
+}
+**/
+#awake-time {
+    grid-column: cright /cend;
+    grid-row: rtopbar / rstatus;
+}
+#pill-combined {
+    order: 1;
+    grid-column: cright / cend;
+    grid-row: 3 / 5;
+}    
+#david-fitness-combined {
+    order: 10;
+    grid-column: cright / cend;
+    grid-row: 5 / 7;
+}
+#emily-fitness-combined {
+    grid-column: cright / cend;
+    grid-row: 7 / 9;
+}    
+#last-update {
+    grid-column: 6 / cend;
+    grid-row: rbase / rend;
     display: flex;
     align-items:center;
     justify-content: center;
     flex-direction: column
 }
+#fitness {
+    grid-column: 5/cend;
+    grid-row: 7/9;
+}
+
+
+
+
+
+
+
+
+
+
+
+#fitness {
+    font-size: 4em;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #last_update h1 {
     font-size: medium;
 }
@@ -117,11 +228,11 @@ h1 {
 }
 .hourly-weather-entry {
     display: grid;
-    width: 30px;
+    width: calc(100% / 24);
 }
 
 .hwe-icon img {
-    width: 28px;
+    width: calc( 7 * var(--quarter-unit) );;
     margin: 0 auto;
     filter: invert(1) opacity(0.5);
 }
@@ -129,7 +240,7 @@ h1 {
 .hwe-filler {
     position: absolute;
     display: block;
-    width: 30px;
+    width: 90%;
     bottom: 0;
 }
 .hwe-filler.temp {
@@ -141,13 +252,13 @@ h1 {
     background: rgb(0 116 255 / 30%);
 }
 .hwe-bar-container {
-    height: 44px;
-    margin-top: 16px;
+    height: calc( 11 * var(--quarter-unit) );
+    margin-top: var(--unit);
     position: relative;
 }
 .hwe-stat-container {
-    height: 32px;
-    margin-top: 20px;
+    height: calc(2 * var(--unit));;
+    margin-top: calc( 5 * var(--quarter-unit) );
     position: relative;
 }
 .hwe-stat {
@@ -163,8 +274,8 @@ h1 {
 .hwe-hour {
     text-align: center;
     font-weight: bold;
-    margin-top: 16px;
-    font-size: 12px;
+    margin-top: var(--unit);
+    font-size: calc( 3 * var(--quarter-unit) );
 }
 
 
@@ -174,9 +285,9 @@ h1 {
 #agenda {
 }
 #agenda h2 {
-    height: 20px;
+    height: calc( 5 * var(--quarter-unit) );
     text-align: left;
-    font-size: 24px;
+    font-size: calc( 6 * var(--quarter-unit) );
 }
 #agenda-container {
     overflow-y: hidden;
@@ -188,9 +299,9 @@ h1 {
 .agenda-entry {
     display: flex;
     justify-content: space-between;
-    margin-left: 16px;
-    padding-top: 16px;
-    font-size: 20px;
+    margin-left: var(--unit);
+    padding-top: var(--unit);
+    font-size: calc( 5 * var(--quarter-unit) );
 }
 
 .a-e-name {
@@ -201,7 +312,7 @@ h1 {
     border-style: dashed;
 }
 .a-e-event-list {
-    padding-bottom: 16px;
+    padding-bottom: var(--unit);
 }
 .a-e-status-STARTED {
     font-weight: bold;
@@ -219,17 +330,17 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    padding: 0 12px;
+    padding: 0 calc( 3 * var(--quarter-unit) );
 }
 .cur-sun-entry img {
-    height: 32px;
+    height: calc(2 * var(--unit));
 }
 .cur-stats {
     display: flex;
     justify-content: space-between;
-    font-size: 32px;
+    font-size: calc(2 * var(--unit));
     font-weight: bold;
-    height: 16px;
+    height: var(--unit);
 }
 .cur-hum {
     padding-right: 4px;
@@ -237,7 +348,7 @@ h1 {
 .cur-hum:after {
     content: '%';
     position: absolute;
-    font-size: 16px;
+    font-size: var(--unit);
     margin: 3px -2px;
 }
 .cur-text-info {
@@ -254,33 +365,66 @@ h1 {
     text-align: center;
 }
 .cur-icon img {
-    width: 64px;
+    width: calc( 4 * var(--unit));
 }
 #current-weather img {
     filter: invert(1) opacity(0.9);
 }
 
+#pill-combined {
+    display: relative;
+}
 
-
+#pill-combined-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: var(--padding);
+    top: var(--padding);
+    left: var(--padding);
+    right: var(--padding);
+    white-space: nowrap;
+}
+.p-c-section {
+    max-height: 50%;
+    width: 100%;
+    flex-grow: 1;
+}
 #pill-timing-container {
     display: flex;
-  justify-content: center;
-  align-items: center;
+    justify-content: center;
+    align-items: center;
     grid-template-rows: 1fr 1fr;
-    height: 100%;
 }
 
 .p-t-current {
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: baseline;
   font-size: 1.5em;
-    width: 100%;
+  width: 100%;
+}
+.p-t-agebar {
+    position: relative;
+    height: .05em;
+    width: 50%;
+    margin-left: 25%;
+    background: white;
+    opacity: 50%;
+    margin-bottom: .25em;
+    overflow: hidden;
+}
+.p-t-agebar-filler {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: #035;
 }
 .p-t-history ul {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     width: 100%;
     height: 100%;
     justify-content: space-evenly;
@@ -289,17 +433,48 @@ h1 {
     display: none;
 }
 .p-t-label {
-    font-size: .8em;
+    font-size: .5em;
 }
 .p-t-elapsed {
     font-size: 2em;
 }
 .p-t-h-entry {
-    font-size: 1em;
+    border-radius: 4px;
+    margin:2px;
+    font-size: .8em;
+    position: relative;
+    overflow: hidden;
+    /*
     display: flex;
     justify-content: space-around;
     align-items: baseline;
     height: 1.2em;
+   */
+}
+.p-t-h-True .p-t-d-size {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--pill-color);
+}
+.p-t-h-True .p-t-d-size.p-t-d-size-30 {
+    right: 25%;
+}
+
+.p-t-h-True .p-t-d-size.p-t-d-size-25 {
+    right: 375%;
+}
+
+.p-t-h-True .p-t-d-size.p-t-d-size-20 {
+    right: 50%;
+}
+
+
+.p-t-d-info-container {
+    padding: 2px .5em;
+    position: inherit;
 }
 .p-t-start {
     flex-grow: 1;
@@ -311,20 +486,16 @@ h1 {
 }
 .p-t-h-True {
     background-color: #525363;
-    border-radius: 4px;
-    margin:2px;
-    padding: 2px .5em;
-    font-size: .8em;
 }
 .p-t-h-False {
-    background-color: None;
+    background-color: #5555;
 }
 .p-t-h-day {
     /*font-size: .5em;*/
     color: #aaa;
 }
 .p-t-h-hour {
-    color: #eee;
+     color: #eee;
 }
 
 
@@ -335,7 +506,7 @@ h1 {
 }
 .tc-title-holder, .tc-info {
     display: flex;
-    margin-bottom: 8px;
+    margin-bottom: calc(.5 * var(--unit));
 }
 .tc-title-holder {
     justify-content: flex-start;
@@ -343,14 +514,20 @@ h1 {
 .tc-info {
     justify-content: space-between;
 }
+.tc-timeular-tag {
+    font-family: monospace;
+    padding: .2em;
+    display: inline-block;
+    border-radius: var(--quarter-unit);
+}
 .tc-activity-time {
     font-family: monospace;
-    font-size: 28px;
+    font-size: calc( 7 * var(--quarter-unit) );;
 }
 .tc-color-dot {
-    height: 24px;
-    width: 24px;
-    border-radius: 16px;
+    height: calc(6 * var(--quarter-unit) );
+    width: calc(6 * var(--quarter-unit) );
+    border-radius: var(--unit);
     border: 3px solid;
 }
 .tc-activity-note {
@@ -359,8 +536,8 @@ h1 {
     text-overflow: ellipsis;
 }
 .tc-activity-name {
-    font-size: 26px;
-    line-height: 32px;
+    font-size: calc(6 * var(--quarter-unit) );
+    line-height: 2em;
     vertical-align: middle;
     white-space: nowrap;
     padding-left: 4px;
@@ -369,9 +546,10 @@ h1 {
 #activity-tracker-recent{
 }
 #activity-tracker-recent h1 {
-    height: 20px;
+    height: 1em;
     text-align: left;
-    font-size: 24px;
+    font-size: 1em;
+    display: none;
 }
 .atr-calendar {
     filter: saturate(0.5);
@@ -379,9 +557,14 @@ h1 {
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
-    bottom: 16px;
     position: absolute;
-    top: 64px;
+    bottom: 1em;
+    top: 1em;
+    /*
+    bottom: var(--unit);
+    top: calc( 4 * var(--unit));
+   */
+    
     width: 94%;
 }
 .atr-cal-line {
@@ -395,27 +578,53 @@ h1 {
     opacity: 25%;
 }
 .atr-day {
-    width: 10%;
+    flex-grow: 1;
+    margin-right: 1%;
     height: 100%;
     position: relative;
+    background: #1a42b142;
 }
 .atr-block {
     position: absolute;
     width: 100%;
-    --sleep-width: 70%;
+    z-index: 2;
+    --sleep-width:40%;
+}
+
+.atr-now {
+    border-bottom: 3px solid white;
+    width: 100%;
+    box-shadow: 0 0 .5em var(--quarter-unit) #fff7;
+    z-index: 1;
+}
+
+/* ACTIVITY TIMELINE PILL */
+.atr-block.atr-id-pill-pill {
+    background: var(--pill-color);
+    z-index: 0;
+    opacity: 30%;
+    box-shadow: 0 0 0 1px grey;
+}
+
+/* ACTIVITY TIMELINE SLEEP */
+.atr-block.atr-sleep-quality-EXCELLENT,
+.atr-block.atr-sleep-quality-GOOD,
+.atr-block.atr-sleep-quality-FAIR,
+.atr-block.atr-sleep-quality-POOR {
 }
 .atr-block.atr-sleep-quality-EXCELLENT {
-    --quality-color: darkgreen;
+    --quality-color: lime;
 }
 .atr-block.atr-sleep-quality-GOOD {
-    --quality-color: blue;
+    --quality-color: yellow;
 }
 .atr-block.atr-sleep-quality-FAIR {
-    --quality-color: orange;
+    --quality-color: brown;
 }
 .atr-block.atr-sleep-quality-POOR {
     --quality-color: red;
 }
+/*
 .atr-block.atr-id-deep-sleep ,
 .atr-block.atr-id-light-sleep ,
 .atr-block.atr-id-awake-sleep ,
@@ -426,15 +635,21 @@ h1 {
     width: calc(var(--subelem-width));
     background: var(--quality-color);
 }
+*/
+
+
 .atr-block.atr-id-sleep-sleep {
-    width: calc(var(--sleep-width) - 16px);
-    margin-left: 15%;
-    border-left: 8px solid var(--quality-color);
-    border-right: 8px solid var(--quality-color);
+    width: var(--sleep-width);
+    margin-left: calc( (100% - var(--sleep-width)) / 2);
+    /*
+      border-left: calc(.5 * var(--unit)) solid var(--quality-color);
+      border-right: calc(.5 * var(--unit)) solid var(--quality-color);
+      background: rgba(0,0,0,.4);
+   */
     background: var(--quality-color);
-    background: rgba(0,0,0,.4);
-    opacity: 40%;
-    z-index: 1;
+    opacity: 20%;
+    z-index: 2;
+    box-shadow: 0 0 var(--quarter-unit) var(--quarter-unit) var(--quality-color);
 }
 .atr-block.atr-id-deep-sleep {
     --subelem-width: 53%;
@@ -444,7 +659,7 @@ h1 {
 }
 .atr-block.atr-id-awake-sleep {
     --subelem-width: var(--sleep-width);
-    width: calc(var(--sleep-width) - 8px);
+    width: calc(var(--sleep-width) - (.5 * var(--unit)));
     background: pink;
     border-left: 4px solid pink;
     border-right: 4px solid pink;
@@ -452,6 +667,32 @@ h1 {
 }
 .atr-block.atr-id-rem-sleep {
     --subelem-width: 75%;
+}
+ 
+/* ACTIVITY TIMELINE WORKOUT HISTORY */
+.atr-id-workout-workout {
+    border: 2px dashed orange;
+}
+.atr-workout-RUNNING {
+    background: #04f8;
+    border-color: cyan;
+}
+
+.atr-workout-WALKING {
+    background: #2828;
+    border-color: lime;
+}
+.atr-workout-STRENGTH_TRAINING {
+    background: #a008;
+    border-color: pink;
+}
+.atr-workout-INDOOR_CYCLING {
+    background: #b608;
+    border-color: yellow;
+}
+.atr-workout-INDOOR_ROWING {
+    background: #b608;
+    border-color: green;
 }
 
 
@@ -463,7 +704,7 @@ h1 {
 }
 
 .dwe-icon img {
-    width: 28px;
+    width: calc( 7 * var(--quarter-unit) );;
     margin: 0 auto;
     filter: invert(1) opacity(0.9);
 }
@@ -499,12 +740,12 @@ div#now {
 
 div#time-curtime {
     font-family: sans-serif;
-    font-size: 128px;
+    font-size: calc(8 * var(--unit));;
     font-weight: bolder;
 }
 
 div#time-curdate {
-    font-size: 32px;
+    font-size: calc(2 * var(--unit));
 }
 #time-cursec {
     position: absolute;
@@ -516,4 +757,292 @@ div#time-sec-progress {
     position: absolute;
     height: 100%;
     transition: width 1s linear;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#david-fitness-combined,
+#emily-fitness-combined {
+    position: relative;
+}
+.f-c-title {
+    text-align: left;
+    position: absolute;
+    bottom: var(--padding);
+    color: black;
+    opacity: 30%;
+    font-size: 3em;
+    font-weight: bold;
+    display: none;
+}
+.f-c-readiness {
+
+}
+.f-c-fitness-bar {
+    left: 0;
+    right: 0;
+    bottom: var(--padding);
+    top: 30%;
+    position: absolute;
+}
+
+.readiness-container {
+    display: flex;
+    position: absolute;
+    justify-content: space-around;
+    align-items: center;
+    left: 0;
+    right: 0;
+    top: var(--padding);
+    bottom: 70%;
+}
+
+.fitness-bar-container {
+}
+
+.r-c-stat {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: space-between;
+    height: 100%;
+}
+
+.r-c-val {
+    font-size: 2em;
+}
+
+
+.f-b-history {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    display: grid;
+    grid-gap: 0.5em;
+    margin: .5em;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    --f-b-activity-color: black;
+}
+.f-b-workout-RUNNING {
+    --f-b-activity-color: #04f;
+}
+.f-b-workout-WALKING {
+    --f-b-activity-color: #282;
+}
+.f-b-workout-STRENGTH_TRAINING {
+    --f-b-activity-color: #a00;
+}
+.f-b-workout-INDOOR_CYCLING {
+    --f-b-activity-color: #b60;
+}
+.f-b-workout-INDOOR_ROWING {
+    --f-b-activity-color: #0b3;
+}
+.f-b-workout-RESORT_SKIING_SNOWBOARDING_WS {
+    --f-b-activity-color: #f4f;
+}
+
+.f-b-week-entry {
+    display: contents;
+    /*
+    display: flex;
+    flex-grow: 1;
+    width: 90%;
+    justify-content: left;
+   */
+}
+.f-b-daily-entry {
+    opacity: .25;
+    border-radius: 0.5em;
+    margin: 0.25em;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.f-b-daily-entry {
+    border: 1px solid;
+    border-color: #422;
+    background: #422a;
+}
+
+.f-b-daily-rest-0 {
+    background: #0000;
+    border-color: #000;
+    opacity: 1;
+}
+/*
+.f-b-daily-rest-1 {
+    border-color: #0222;
+    background: #5553;
+    opacity: .75;
+}
+.f-b-daily-rest-2 {
+    border: 1px solid;
+    border-color: #744;
+    background: #744f;
+}
+*/
+
+.f-b-effort-level {
+    bottom: 0;
+    /*background: #ccc8;*/
+    top: 100%;
+    border-top: 1px solid #ccc;
+    width: 100%;
+    position: absolute;
+    opacity: 1;
+}
+
+.f-b-activity-level {
+    bottom: 0;
+    background: #ccc2;
+    top: 100%;
+    width: 100%;
+    position: absolute;
+    display:none;
+}
+
+.f-b-workout {
+    bottom: 0%;
+    top: 0%; 
+    left: 0%;
+    right: 100%;
+    opacity: 50%;
+    border-color: var(--f-b-activity-color);
+    background-color: black;
+    background-color: var(--f-b-activity-color);
+    border-right: 2px solid var(--f-b-activity-color);
+    width: 0%;
+    position: absolute;
+}
+
+
+/* effort levels must go last */
+.f-b-effort-level-0 {
+    width: 10%;
+}
+.f-b-effort-level-1 {
+    width: 30%;
+}
+.f-b-effort-level-2 {
+    width: 50%;
+}
+.f-b-effort-level-3 {
+    width: 80%;
+}
+.f-b-effort-level-4 {
+    width: 90%;
+}
+.f-b-effort-level-5 {
+    width: 100%;
+}
+
+
+#awake-time-container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: space-between;
+    align-items: center;
+    height: 100%;
+    font-family: monospace;    
+}
+
+#awake-time-render-target {
+    font-size: 4em;
+}
+
+#citibike-status {
+    padding: var(--quarter-unit);
+}
+
+#citibike-status-container {
+    display: flex;
+    justify-content: space-around;
+    height: 100%;
+}
+
+.cb-s-station.cb-s-station-status-active {
+    background: #ccc4;
+}
+.cb-s-station {
+    background: #ff000033;
+    border-radius: var(--quarter-unit);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: calc(95% / 8);
+    overflow: hidden;
+    height: 100%;
+    box-shadow: .05em .05em .2em 0 #0006;
+}
+
+.cb-s-s-name {
+    white-space: wrap;
+    max-height: 2em;
+}
+
+.cb-s-s-infobar {
+    display:flex;
+    justify-content: center;
+    gap: var(--unit);
+    width: 100%;
+}
+
+.cb-s-s-capacity {
+    display:none;
+}
+
+.cb-s-s-num_bikes_available,
+.cb-s-s-num_ebikes_available,
+.cb-s-s-num_docks_available {
+    font-family: monospace;
+    border-radius: var(--quarter-unit);
+    background: #fff3;
+    height: var(--unit);
+    line-height: var(--unit);
+    text-align: center;
+    border: 1px solid;
+    border-color: #fff3;
+}
+.cb-s-s-num_bikes_available {
+    background: #2de5;
+    border-color: #2de5;
+    display: flex;
+    justify-content: space-around;
+    width: 3em;
+}
+.cb-s-s-bike-count {
+    color: white;
+}
+.cb-s-s-ebike-count {
+    color: orange;
+}
+
+.cb-s-s-num_docks_available {
+    background: #11fa;
+    border-color: #88fa;
+    width: 1.5em;
 }

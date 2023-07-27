@@ -1,0 +1,26 @@
+<html>
+<script>
+  function openFullscreen() {
+      const elem = document.getElementById('container');
+      if (elem.requestFullscreen) {
+	  elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) {
+	  elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) {
+	  elem.msRequestFullscreen();
+      }
+  }
+  setInterval(function(){ document.getElementById('container').contentWindow.location.reload();}, 120000);
+  setTimeout(function(){ document.getElementsByTagName('button')[0].remove(); }, 5000);
+</script>
+<style>
+  body {
+      padding: 0;
+      margin: 0;
+  }
+</style>
+<body>
+  <button onclick="openFullscreen();"> fullscreen</button>
+  <iframe id="container" src="/" style="width:100%; height: 100%;" />
+</body>
+</html>

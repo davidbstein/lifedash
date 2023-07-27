@@ -1,9 +1,12 @@
 import datetime
 import dateutil
 import json
+import time
+
 
 from renderers.templates import (
     TRACKER_TEMPLATE,
+    TRACKER_TIMEULAR_TAG,
     ACTIVITY_TEMPLATE,
     ACTIVITY_BLOCK,
     ACTIVITY_DAY,
@@ -24,43 +27,112 @@ def _doy(dt):
     if not dt:
         return None
     today_doy = int(datetime.datetime.now().strftime("%-j"))
-    if today_doy < 30 or today_doy > 300:
+    if today_doy < 60 or today_doy > 270:
         dt = dt + datetime.timedelta(days=180)
     return int(dt.strftime("%-j"))
 
 
-def _garmin_sleep_to_timular_entry(sleep_obj, overrides={}, id_="sleep"):
-    # use mostly the same informatino, but tweak for subsections...
-    sleep = {k:v for k, v in sleep_obj.items()}
-    sleep.update(overrides)
-    # if we use a subset, use a subset
-    quality_key = {
-        "sleep": "restlessness",
-        "deep": "deepPercentage", 
-        "light": "lightPercentage",
-        "awake": "awakeCount",
-        "rem": "remPercentage",
-    }.get(id_, {})
-    quality = sleep['sleepScores'][quality_key].get("qualifierKey", "NONE")
-    # only endTime for sub-sections / only duraction for the main sleep.
-    endTime = sleep.get("endTimeInSeconds", (sleep['startTimeInSeconds'] + sleep['durationInSeconds'] + sleep['awakeDurationInSeconds']))
+def _pill_to_timular_entry(pill_entry, id_="pill"):
+    #print(json.dumps(pill_entry, indent=2))
+    HOURS = 60*60
+    size = str(pill_entry.get("pillSize", 30)).upper()
+    duration = {
+        "30": 10*HOURS,
+        "25": 8*HOURS,
+        "20": 7*HOURS,
+        "10": 2*HOURS,
+        "OTHER": 3 * HOURS,
+    }[size]
     return {
         'duration': {
-            'startedAt': _ts2timeularDate(sleep['startTimeInSeconds']),
-            'stoppedAt': _ts2timeularDate(endTime),
+            'startedAt': _ts2timeularDate(pill_entry['timestamp']),
+            'stoppedAt': _ts2timeularDate(pill_entry['timestamp'] + duration),
+        },
+        'activity': {
+            'color': '',
+            'id': f'{id_}-pill',
+            '_extra_classes': [
+                f'atr-pill-size-{size}', 
+            ]
+        },
+        'note': {
+            "_full_data": pill_entry
+        },
+    }
+
+def _oura_sleep_to_timeular_entry(sleep_entry, id_="sleep"):
+    #print(json.dumps(sleep_entry['bedtime_start'], indent=2))
+    score = sleep_entry.get("score", 0)
+    quality = ["POOR", "FAIR", "GOOD", "EXCELLENT"][(score > 50) + (score > 67) + (score > 80)]
+    return {
+        'duration': {
+            'startedAt': _ts2timeularDate(sleep_entry['bedtime_start']),
+            'stoppedAt': _ts2timeularDate(sleep_entry['bedtime_end']),
         },
         'activity': {
             'color': '',
             'id': f'{id_}-sleep',
             '_extra_classes': [
                 f'atr-sleep-quality-{quality}', 
-                f'{sleep["summaryId"]}'
             ]
         },
         'note': {
-            "_extra": sleep.get('sleepScores', ""),
+            "_scores": {key:sleep_entry[key] for key in sleep_entry.keys() if 'score' in key},
+            "_full_data": sleep_entry
         },
     }
+    
+def _garmin_workout_to_timeular_entry(workout_entry, id_="workout"):
+    return {
+        'duration': {
+            'startedAt': _ts2timeularDate(workout_entry['startTimeInSeconds']),
+            'stoppedAt': _ts2timeularDate(workout_entry['startTimeInSeconds']+workout_entry['durationInSeconds']),
+        },
+        'activity': {
+            'color': '',
+            'id': f'{id_}-workout',
+            '_extra_classes': [
+                f'atr-workout-{workout_entry["activityType"]}', 
+            ]
+        },
+        'note': {
+            "_full_data": workout_entry
+        },
+    }
+
+def _current_timeular_to_timeular_record(current_activity):
+    #print(current_activity)
+    now = _ts2timeularDate(int(time.time()))
+    to_ret = [
+        {
+            'duration': {
+                'startedAt': now,
+                'stoppedAt': now,
+            },
+            'activity': {
+                'color': '',
+                'id': f'atr-now-line',
+                '_extra_classes': [f'atr-now']        
+            },
+            "note": {}
+        }
+    ]
+    if current_activity.get('currentTracking'):
+        to_ret.append(
+            {
+                'duration': {
+                    'startedAt': current_activity['currentTracking']['startedAt'],
+                    'stoppedAt': now,
+                },
+                'activity': dict(
+                    _extra_classes=[f'atr-current'],
+                    **current_activity['currentTracking']['activity']
+                ),
+                'note': {},
+            }
+        )
+    return to_ret
+
 
 def process_sleep_data(sleep_data):
     """ the output gets appended to tracker_data['timeEntries'] for the _parse_tracking_history """
@@ -93,30 +165,39 @@ def entry_object(start, end, te):
 TOP_OFFSET = 0
 BOTTOM_OFFSET = 1
 ACTIVITY_DICT = 2
+NUM_DAYS = 14
 def _parse_tracking_history(tracker_data):
     recent = tracker_data['timeEntries']
-    days = [[] for _ in range(8)]
+    days = [[] for _ in range(NUM_DAYS+1)]
     cur = 0
+    today_dt = datetime.datetime.now()
     today = _doy(datetime.datetime.now())
     day_length = 24 * 60 * 60
     for te in recent:
         start = _str2dt(te['duration']['startedAt'])
         end = _str2dt(te['duration']['stoppedAt'])
-        if (7 - today + _doy(start)) < 0 or (7 - today + _doy(end)) < 0:
+        if (NUM_DAYS - today + _doy(start)) < 0 or (NUM_DAYS - today + _doy(end)) < 0:
             continue
         if start.day == end.day:
-            days[7 - today + _doy(start)].append(entry_object(start, end, te))
+            days[NUM_DAYS - today + _doy(start)].append(entry_object(start, end, te))
         else:
-            days[7 - today + _doy(start)].append(entry_object(start, None, te))
-            days[7 - today + _doy(end)].append(entry_object(None, end, te))
+            days[NUM_DAYS - today + _doy(start)].append(entry_object(start, None, te))
+            days[NUM_DAYS - today + _doy(end)].append(entry_object(None, end, te))
     activity_history_html = []
     for day in days:
         blocks = []
         for block in day:
             blocks.append(ACTIVITY_BLOCK.format(**block))
         activity_history_html.append(ACTIVITY_DAY.format(blocks=''.join(blocks)))
-    return {"activity_history_html": ''.join(activity_history_html[-7:])}
+    return {"activity_history_html": ''.join(activity_history_html[-NUM_DAYS:])}
 
+
+def _parse_note(note, bgcolor):
+    text = note['text'] or ""
+    for tag in note.get("tags", []):
+        key = "<{{|t|"+f"{tag['id']}"+"|}}>"
+        text = text.replace(key, TRACKER_TIMEULAR_TAG.format(bgcolor=bgcolor, **tag))
+    return text
 
 def _parse_tracking_data(data, history=None):
     track = data['currentTracking']
@@ -140,21 +221,29 @@ def _parse_tracking_data(data, history=None):
     started = dateutil.parser.isoparse(track['startedAt'])
     td = (datetime.datetime.utcnow() - started).seconds
     elapsed = "{}h:{:02d}m".format(td//3600, (td//60) & 60)
+    color = track['activity']['color']
     return {
         "activity_name": "(nothing)" if not track else act['name'],
         'elapsed': elapsed,
         'started': started,
-        'color': track['activity']['color'],
-        'note': track['note']['text'] or ""
+        'color': color,
+        'note': _parse_note(track['note'], color)
     }
-
 
 def render_tracker_html(activity_data):
     current_activity_data = activity_data.get("current_activity", {})
     recent_activity_data = activity_data.get("recent_activity", {})
     return TRACKER_TEMPLATE.format(**_parse_tracking_data(current_activity_data, recent_activity_data))
 
-def render_history_html(activity_data, sleep_data):
+def render_history_html(activity_data, oura_sleep_data, garmin_data=None, calendar_data=None):
+    #recent_activity_data['timeEntries'].extend(process_sleep_data(sleep_data))
     recent_activity_data = activity_data.get("recent_activity", {})
-    recent_activity_data['timeEntries'].extend(process_sleep_data(sleep_data))
+    recent_activity_data['timeEntries'].extend(map(_oura_sleep_to_timeular_entry, oura_sleep_data))
+    current_activity_data = activity_data.get("current_activity", {})
+    recent_activity_data['timeEntries'].extend(_current_timeular_to_timeular_record(current_activity_data))
+    if calendar_data:
+        pills = calendar_data.get('pillDetail')
+        recent_activity_data['timeEntries'].extend(map(_pill_to_timular_entry, pills))
+    if garmin_data:
+        recent_activity_data['timeEntries'].extend(map(_garmin_workout_to_timeular_entry, garmin_data['activities']))
     return ACTIVITY_TEMPLATE.format(**_parse_tracking_history(recent_activity_data))
