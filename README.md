@@ -38,12 +38,13 @@ NOTE: scrapers will get called every minute. Use a cache to avoid getting rate l
 
 ## Setup on Raspberry Pi
 
-  1. `apt install xdotool`
   1. Check out repo into home directory
   1. Set up `secrets.json` and `settings.json`
   1. Check data sources in the `do_update` function in `updater.py`
   1. set up browser kiosk for autostart: `cp system_scripts/lib_systemd_system_kiosk /lib/systemd/system/kiosk`
   1. set up server run script: `cp system_scripts/lib_systemd_system_webserver /lib/systemd/system/webserver`
+  1. install kiosk dependancies: `apt install xdotool upstart`
+  1. set services to autostart: `sudo systemctl enable kiosk; sudo systemctl enable webserver`
   1. Start the servers `sudo service kiosk restart; sudo service webserver restart`
 
 for logs, use `journalctl`. E.g.,  `grc journalctl -f -n100`
